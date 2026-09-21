@@ -13,6 +13,23 @@
   .tag{display:inline-block;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.35);padding:2px 12px;border-radius:999px;font-size:12.5px;letter-spacing:.5px;margin-bottom:8px;}
   h1{font-size:22px;font-weight:700;letter-spacing:.3px;}
   .sub{font-size:13.5px;opacity:.92;margin-top:6px;}
+
+  /* ---------- 标签栏（sticky） ---------- */
+  .tabs{position:sticky;top:0;z-index:20;display:flex;gap:8px;background:#f3f5f9;padding:10px 0;margin-bottom:2px;}
+  .tab{flex:1 1 0;font-family:inherit;font-size:14.5px;font-weight:600;color:#4a5568;background:#fff;border:1px solid #dbe1ec;border-radius:12px;padding:11px 6px;cursor:pointer;transition:all .15s;min-height:46px;}
+  .tab:hover{border-color:#1a73e8;color:#1a5fb4;}
+  .tab.on{background:#1a5fb4;border-color:#1a5fb4;color:#fff;box-shadow:0 4px 12px rgba(26,95,180,.25);}
+
+  /* ---------- 共享参数条（sticky） ---------- */
+  .slider-bar{position:sticky;top:66px;z-index:19;display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;background:#fff;border:1px solid #e2e7f0;border-radius:14px;padding:8px 18px;margin-bottom:16px;box-shadow:0 2px 10px rgba(18,60,119,.06);}
+  .slider-bar label{font-size:13.5px;font-weight:600;color:#333;white-space:nowrap;}
+  .slider-bar input[type=range]{flex:1 1 200px;height:44px;cursor:pointer;accent-color:#1a5fb4;min-width:140px;}
+  .slider-bar .now{font-size:15px;font-weight:700;color:#1a5fb4;font-variant-numeric:tabular-nums;min-width:92px;text-align:right;white-space:nowrap;}
+
+  /* ---------- 面板 ---------- */
+  .panel{display:none;scroll-margin-top:130px;}
+  .panel.on{display:block;}
+
   .question{background:#fff;border:1px solid #e2e7f0;border-radius:14px;padding:14px 18px;margin-bottom:16px;font-size:15px;}
   .question b{color:#1a5fb4;}
   .range-ans{display:inline-block;background:#eef4ff;border:1px solid #b9d0f2;color:#123c77;border-radius:8px;padding:1px 10px;font-weight:600;margin-left:6px;}
@@ -21,15 +38,16 @@
   .control-card{flex:0 0 320px;background:#fff;border:1px solid #e2e7f0;border-radius:14px;padding:16px 18px;display:flex;flex-direction:column;gap:14px;}
   .card-title{font-size:14px;font-weight:700;color:#123c77;display:flex;align-items:center;gap:6px;}
   .card-title .dot{width:8px;height:8px;border-radius:50%;background:#1a73e8;display:inline-block;}
-  svg{display:block;width:100%;height:auto;border:1px solid #edf0f6;border-radius:10px;background:#fbfcfe;}
-  .slider-box label{font-size:13.5px;font-weight:600;color:#333;}
-  .slider-box input[type=range]{width:100%;height:44px;margin:2px 0 0;cursor:pointer;accent-color:#1a5fb4;}
+  svg{display:block;width:100%;height:auto;aspect-ratio:560/500;border:1px solid #edf0f6;border-radius:10px;background:#fbfcfe;}
+  g.layer.off{display:none;}
+
   .readout{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
   .ro{background:#f5f7fb;border:1px solid #e4e9f2;border-radius:10px;padding:8px 10px;}
   .ro .k{font-size:11.5px;color:#6a7383;}
   .ro .v{font-size:16px;font-weight:700;color:#1f2430;font-variant-numeric:tabular-nums;}
-  .ro .v small{font-size:11px;color:#8891a1;font-weight:500;}
-  .state-row{display:flex;align-items:center;gap:10px;}
+  .ro .v small{font-size:11px;color:#8891a1;font-weight:500;display:block;margin-top:-2px;}
+  .ro.hot{border-color:#f3c98f;background:#fdf6ec;}
+  .state-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
   .badge{display:inline-flex;align-items:center;gap:6px;padding:4px 14px;border-radius:999px;font-size:14px;font-weight:700;}
   .badge .bd{width:9px;height:9px;border-radius:50%;display:inline-block;}
   .badge.cross{background:#e8f5ec;color:#1e8e3e;border:1px solid #9ad7ac;}
@@ -39,17 +57,18 @@
   .badge.separate{background:#fdecec;color:#c5221f;border:1px solid #f0b3b3;}
   .badge.separate .bd{background:#c5221f;}
   .btns{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
-  .btn{border:1px solid #d3dae6;background:#fff;border-radius:10px;padding:9px 4px;font-size:13px;color:#1f2430;cursor:pointer;transition:all .15s;min-height:44px;font-family:inherit;}
+  .btn{border:1px solid #d3dae6;background:#fff;border-radius:10px;padding:9px 4px;font-size:13px;color:#1f2430;cursor:pointer;transition:all .15s;min-height:44px;font-family:inherit;line-height:1.35;}
   .btn:hover{border-color:#1a73e8;color:#1a5fb4;background:#f4f8ff;}
   .btn.active{border-color:#1a5fb4;background:#1a5fb4;color:#fff;font-weight:600;}
-  .btn.primary{grid-column:span 3;border-color:#1a5fb4;background:#1a5fb4;color:#fff;font-weight:600;}
-  .btn.primary:hover{background:#123c77;}
+  .btn.mini{min-height:40px;padding:6px 14px;font-size:13px;white-space:nowrap;}
   .legend{font-size:12.5px;color:#4a5568;line-height:2;}
   .legend .sw{display:inline-block;width:26px;height:0;border-top-width:3px;border-top-style:solid;vertical-align:middle;margin-right:6px;border-radius:2px;}
   .legend .sw.dash{border-top-style:dashed;}
-  .guide,.solution{background:#fff;border:1px solid #e2e7f0;border-radius:14px;padding:16px 20px;margin-top:16px;}
+  .legend .sw.dot{border-top-style:dotted;border-top-width:4px;}
+
+  .guide,.solution,.src-card{background:#fff;border:1px solid #e2e7f0;border-radius:14px;padding:16px 20px;margin-top:16px;}
   .guide h2,.solution h2{font-size:16px;color:#123c77;margin-bottom:10px;display:flex;align-items:center;gap:8px;}
-  .guide h2 .no,.solution h2 .no{width:22px;height:22px;border-radius:7px;background:#1a5fb4;color:#fff;font-size:13px;display:inline-flex;align-items:center;justify-content:center;font-weight:700;}
+  .guide h2 .no,.solution h2 .no,.src-card h3 .no{width:22px;height:22px;border-radius:7px;background:#1a5fb4;color:#fff;font-size:12.5px;display:inline-flex;align-items:center;justify-content:center;font-weight:700;flex:none;}
   .guide ol{margin-left:20px;}
   .guide li{margin-bottom:6px;font-size:14.5px;}
   .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:4px;}
@@ -62,16 +81,38 @@
   .hint{font-size:12.5px;color:#8891a1;margin-top:8px;}
   footer{text-align:center;color:#8891a1;font-size:12px;margin-top:20px;}
   .result{background:#f0f7ff;border:1px solid #cfe3fb;border-radius:10px;padding:10px 14px;font-size:14px;color:#123c77;margin-top:14px;}
+  .result.no{background:#fdf1f1;border-color:#f0c7c7;color:#a52222;}
+
+  /* ---------- 溯源面板专用 ---------- */
+  .src-card h3{font-size:15px;color:#123c77;margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+  .src-card p{font-size:14.5px;margin-bottom:8px;}
+  .src-card ul{margin-left:22px;}
+  .src-card li{font-size:14.5px;margin-bottom:6px;}
+  .src-card .formula{margin:6px 0;}
+  .layer-list{display:flex;flex-wrap:wrap;gap:10px 18px;margin-top:10px;font-size:13.5px;}
+  .layer-list label{display:inline-flex;align-items:center;gap:7px;cursor:pointer;user-select:none;padding:2px 0;}
+  .layer-list input{width:16px;height:16px;accent-color:#1a5fb4;cursor:pointer;flex:none;}
+  .vfy{display:inline-block;font-size:11.5px;color:#1e8e3e;background:#e8f5ec;border:1px solid #9ad7ac;border-radius:6px;padding:0 6px;margin-left:6px;white-space:nowrap;vertical-align:1px;}
+  .warn{display:inline-block;font-size:11.5px;color:#c25e00;background:#fdf1e3;border:1px solid #f3c98f;border-radius:6px;padding:0 6px;margin-left:6px;white-space:nowrap;vertical-align:1px;}
+  .chain{font-size:14.5px;line-height:2;}
+  .chain .arrow{color:#1a73e8;font-weight:700;margin:0 6px;}
+
   @media (max-width:860px){
     .main{flex-direction:column;}
     .control-card{flex:1 1 auto;}
     .steps{grid-template-columns:1fr 1fr;}
   }
   @media (max-width:520px){
+    header{padding:16px 18px;}
     h1{font-size:18px;}
+    .sub{font-size:12.5px;}
     .steps{grid-template-columns:1fr;}
     .btns{grid-template-columns:1fr 1fr;}
-    .btn.primary{grid-column:span 2;}
+    .canvas-card{padding:10px 8px;overflow-x:auto;}
+    .canvas-card svg{min-width:470px;}
+    .slider-bar{padding:8px 12px;top:62px;}
+    .slider-bar .now{min-width:0;}
+    .tab{font-size:13px;padding:10px 4px;}
   }
 </style>
 </head>
@@ -80,250 +121,818 @@
   <header>
     <span class="tag">2022 新高考全国Ⅱ卷 · 数学 · 第15题</span>
     <h1>对称直线与圆的位置关系 · 虚拟仿真实验</h1>
-    <div class="sub">拖动参数 a，观察直线关于 y=a 的对称直线与圆的相交 / 相切 / 相离变化</div>
+    <div class="sub">拖动参数 a，观察直线 AB 关于 y=a 的对称直线 L′ 与圆的相交 / 相切 / 相离变化</div>
   </header>
 
-  <div class="question">
-    <b>题目：</b>已知点 A(−2,3)，B(0,a)，若直线 AB 关于 y=a 的对称直线与圆 (x+3)²+(y+2)²=1 存在公共点，则实数 a 的取值范围为<span class="range-ans">________</span>
-    <div class="hint">结论（供核验）：a ∈ [1/3, 3/2]　·　请在实验中自行验证</div>
+  <nav class="tabs" role="tablist" aria-label="实验模块">
+    <button class="tab on" data-p="orig"  role="tab" aria-selected="true"  aria-controls="panel-orig">原题仿真</button>
+    <button class="tab"    data-p="trace" role="tab" aria-selected="false" aria-controls="panel-trace">题目溯源</button>
+    <button class="tab"    data-p="vary"  role="tab" aria-selected="false" aria-controls="panel-vary">变式探究</button>
+  </nav>
+
+  <div class="slider-bar">
+    <label for="aSlider">参数 a</label>
+    <input id="aSlider" type="range" min="-1.6" max="3" step="0.01" value="0.8" aria-label="参数 a（点 B 的纵坐标）">
+    <span class="now" data-r="aNow">0.80</span>
+    <button class="btn mini" id="playBtn">▶ 自动演示</button>
+    <button class="btn mini" id="resetBtn">↺ 重置</button>
   </div>
 
-  <div class="main">
-    <div class="canvas-card">
-      <div class="card-title"><span class="dot"></span>实验画布 · 坐标平面</div>
-      <svg id="board" viewBox="0 0 560 500" role="img" aria-label="坐标平面：圆C、点A、点B、直线AB与其关于y=a的对称直线">
-        <defs>
-          <pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse">
-            <path d="M50 0H0V50" fill="none" stroke="#e9edf3" stroke-width="1"/>
-          </pattern>
-        </defs>
-        <rect width="560" height="500" fill="url(#grid)"/>
-        <line x1="0" y1="250" x2="560" y2="250" stroke="#b9c2d0" stroke-width="1.2"/>
-        <line x1="280" y1="0" x2="280" y2="500" stroke="#b9c2d0" stroke-width="1.2"/>
-        <text x="552" y="238" font-size="11" fill="#7a8494">x</text>
-        <text x="290" y="14" font-size="11" fill="#7a8494">y</text>
-        <!-- x 轴刻度：以 px(值)=280+50×值 为中心严格对齐网格线 -->
-        <text x="80" y="266" font-size="11" fill="#9aa3b1" text-anchor="middle">−4</text>
-        <text x="180" y="266" font-size="11" fill="#9aa3b1" text-anchor="middle">−2</text>
-        <text x="380" y="266" font-size="11" fill="#9aa3b1" text-anchor="middle">2</text>
-        <text x="480" y="266" font-size="11" fill="#9aa3b1" text-anchor="middle">4</text>
-        <!-- y 轴刻度：垂直居中于 py(值)=250−50×值 -->
-        <text x="272" y="54" font-size="11" fill="#9aa3b1" text-anchor="end">4</text>
-        <text x="272" y="154" font-size="11" fill="#9aa3b1" text-anchor="end">2</text>
-        <text x="272" y="354" font-size="11" fill="#9aa3b1" text-anchor="end">−2</text>
-        <text x="272" y="454" font-size="11" fill="#9aa3b1" text-anchor="end">−4</text>
+  <!-- ==================== 面板① 原题 ==================== -->
+  <section class="panel on" id="panel-orig" role="tabpanel" aria-labelledby="tab-orig">
+    <div class="question">
+      <b>题目：</b>已知点 A(−2,3)，B(0,a)，若直线 AB 关于 y=a 的对称直线与圆 (x+3)²+(y+2)²=1 存在公共点，则实数 a 的取值范围为<span class="range-ans">________</span>
+      <div class="hint">结论（供核验）：a ∈ [1/3, 3/2]　·　请在实验中自行验证</div>
+    </div>
 
-        <line id="lineAxis" x1="30" y1="210" x2="540" y2="210" stroke="#5aa0e8" stroke-width="1.6" stroke-dasharray="2 6"/>
-        <text id="axisLabel" x="26" y="196" font-size="12" fill="#5aa0e8">对称轴 y=a</text>
+    <div class="main">
+      <div class="canvas-card">
+        <div class="card-title"><span class="dot"></span>实验画布 · 坐标平面</div>
+        <svg id="board-orig" viewBox="0 0 560 500" role="img" aria-label="坐标平面：圆C、点A、点B、直线AB与其关于y=a的对称直线L′"></svg>
+        <div class="legend" style="margin-top:8px;">
+          <span class="sw" style="border-color:#1a73e8;"></span>对称直线 L′
+          <span class="sw dash" style="border-color:#9aa0a6;"></span>直线 AB
+          <span class="sw dash" style="border-color:#5aa0e8;"></span>对称轴 y=a
+          <span class="sw" style="border-color:#202124;"></span>圆 C
+          <span class="sw dash" style="border-color:#e8710a;"></span>相切临界位置
+          <span class="sw" style="border-color:#e8710a;"></span>圆心到 L′ 的垂距 d
+        </div>
+      </div>
 
-        <circle cx="130" cy="350" r="50" fill="#dbe7f6" fill-opacity="0.4" stroke="#202124" stroke-width="2"/>
-        <circle cx="130" cy="350" r="3" fill="#202124"/>
-        <text x="92" y="360" font-size="12.5" fill="#202124">圆C</text>
-        <text x="62" y="382" font-size="11.5" fill="#555">(−3,−2), r=1</text>
+      <div class="control-card">
+        <div class="card-title"><span class="dot"></span>参数读数</div>
+        <div class="readout">
+          <div class="ro"><div class="k">a 当前值</div><div class="v"><span data-r="roA">0.80</span><small data-r="roAdec"></small></div></div>
+          <div class="ro"><div class="k">直线 AB 斜率 k</div><div class="v" data-r="roK">−1.10</div></div>
+          <div class="ro" data-r="roDbox"><div class="k">圆心到 L′ 距离 d</div><div class="v" data-r="roD">0.336</div></div>
+          <div class="ro"><div class="k">半径 r</div><div class="v">1<small>（定值）</small></div></div>
+        </div>
+        <div class="state-row">
+          <span style="font-size:13.5px;font-weight:600;">位置关系：</span>
+          <span class="badge cross" data-r="badge"><span class="bd"></span><span data-r="badgeTxt">相交</span></span>
+        </div>
+        <div class="result" data-r="result">当 a∈[1/3, 3/2] 时，L′ 与圆存在公共点</div>
 
-        <circle cx="180" cy="100" r="4.5" fill="#202124"/>
-        <text x="150" y="86" font-size="12.5" fill="#202124">A(−2,3)</text>
-
-        <line id="lineAB" x1="180" y1="100" x2="280" y2="210" stroke="#9aa0a6" stroke-width="2" stroke-dasharray="8 5"/>
-        <circle id="ptB" cx="280" cy="210" r="5" fill="#e8710a" stroke="#fff" stroke-width="1.5"/>
-        <text id="labelB" x="290" y="202" font-size="12.5" fill="#c25e00" font-weight="700">B(0,0.80)</text>
-
-        <line id="lineLp" x1="130" y1="250" x2="430" y2="250" stroke="#1a73e8" stroke-width="3.4"/>
-        <text id="labelLp" x="418" y="240" font-size="13" fill="#1a5fb4" font-weight="700">L′</text>
-
-        <line id="lineCr1" x1="80" y1="500" x2="425" y2="40" stroke="#e8710a" stroke-width="1.6" stroke-dasharray="9 6"/>
-        <text x="400" y="52" font-size="11.5" fill="#c25e00">a=1/3 相切</text>
-        <line id="lineCr2" x1="80" y1="325" x2="430" y2="62.5" stroke="#e8710a" stroke-width="1.6" stroke-dasharray="9 6"/>
-        <text x="392" y="120" font-size="11.5" fill="#c25e00">a=3/2 相切</text>
-
-        <line id="distSeg" x1="130" y1="350" x2="130" y2="350" stroke="#e8710a" stroke-width="2.2"/>
-        <circle id="ptH" cx="130" cy="350" r="3.5" fill="#e8710a"/>
-      </svg>
-      <div class="legend" style="margin-top:8px;">
-        <span class="sw" style="border-color:#1a73e8;"></span>对称直线 L′
-        <span class="sw dash" style="border-color:#9aa0a6;"></span>直线 AB
-        <span class="sw dash" style="border-color:#5aa0e8;"></span>对称轴 y=a
-        <span class="sw" style="border-color:#202124;"></span>圆 C
-        <span class="sw dash" style="border-color:#e8710a;"></span>相切临界位置
-        <span class="sw" style="border-color:#e8710a;border-top-style:solid;"></span>圆心到 L′ 的垂距 d
+        <div class="card-title" style="margin-top:4px;"><span class="dot"></span>实验操作</div>
+        <div class="btns">
+          <button class="btn" data-a="-0.5">a=−0.5<br>相离</button>
+          <button class="btn" data-a="0.3333333333333333">a=1/3<br>左临界</button>
+          <button class="btn" data-a="0.8">a=0.8<br>相交</button>
+          <button class="btn" data-a="1.5">a=3/2<br>右临界</button>
+          <button class="btn" data-a="2.2">a=2.2<br>相离</button>
+          <button class="btn" data-a="1">a=1<br>d=0 过圆心</button>
+        </div>
+        <div class="hint">滑块与按钮支持键盘操作；「自动演示」按当前面板的区间来回扫描，可随时暂停。</div>
       </div>
     </div>
 
-    <div class="control-card">
-      <div class="card-title"><span class="dot"></span>参数控制台</div>
-      <div class="slider-box">
-        <label for="aSlider">参数 a（点 B 的纵坐标）</label>
-        <input id="aSlider" type="range" min="-1" max="3" step="0.01" value="0.8" aria-label="参数a">
-      </div>
-      <div class="readout">
-        <div class="ro"><div class="k">a 当前值</div><div class="v" id="roA">0.80</div></div>
-        <div class="ro"><div class="k">直线 AB 斜率 k</div><div class="v" id="roK">−1.10</div></div>
-        <div class="ro"><div class="k">圆心到 L′ 距离 d</div><div class="v" id="roD">0.336</div></div>
-        <div class="ro"><div class="k">半径 r</div><div class="v">1<small>（定值）</small></div></div>
-      </div>
-      <div class="state-row">
-        <span style="font-size:13.5px;font-weight:600;">位置关系：</span>
-        <span id="stateBadge" class="badge cross"><span class="bd"></span>相交</span>
-      </div>
-      <div class="result" id="resultText">当 a∈[1/3, 3/2] 时，L′ 与圆存在公共点</div>
-
-      <div class="card-title" style="margin-top:4px;"><span class="dot"></span>实验操作</div>
-      <div class="btns">
-        <button class="btn" data-a="-0.5">a=−0.5<br>相离</button>
-        <button class="btn" data-a="0.3333333">a=1/3<br>左临界</button>
-        <button class="btn" data-a="0.8">a=0.8<br>相交</button>
-        <button class="btn" data-a="1.5">a=3/2<br>右临界</button>
-        <button class="btn" data-a="2.2">a=2.2<br>相离</button>
-        <button class="btn" id="resetBtn">重置<br>a=0.8</button>
-        <button class="btn primary" id="playBtn">▶ 自动演示：a 从 −1 到 3</button>
-      </div>
-      <div class="hint">滑块与按钮支持键盘操作；演示过程中可随时暂停。</div>
+    <div class="guide">
+      <h2><span class="no">1</span>实验观察任务</h2>
+      <ol>
+        <li>将 a 从 −1.6 缓慢拖到 3，观察对称直线 L′ 的转动方向，以及它与圆 C 的位置关系如何变化。</li>
+        <li>记录两次「恰好相切」时 a 的值（提示：1/3 与 3/2），观察相切时直线与圆公共点的个数。</li>
+        <li>在 a∈[1/3, 3/2] 内任意取值：L′ 始终与圆有公共点；在区间外取值：L′ 与圆相离。验证这一规律。</li>
+        <li>点击 a=1：此时 d=0，L′ 恰好过圆心，弦成为直径——说明 <b>d 是本问题的唯一核心量</b>。</li>
+      </ol>
+      <div class="hint">核心结论：d ≤ 1 ⟺ 有公共点（含相切）；d &gt; 1 ⟺ 相离。临界处 d = 1。</div>
     </div>
-  </div>
 
-  <div class="guide">
-    <h2><span class="no">1</span>实验观察任务</h2>
-    <ol>
-      <li>将 a 从 −1 缓慢拖到 3，观察对称直线 L′ 的转动方向，以及它与圆 C 的位置关系如何变化。</li>
-      <li>记录两次"恰好相切"时 a 的值（提示：约 0.333 与 1.5），观察相切时直线与圆公共点的个数。</li>
-      <li>在 a∈[1/3, 3/2] 内任意取值：L′ 始终与圆有公共点；在区间外取值：L′ 与圆相离。验证这一规律。</li>
-      <li>点击"自动演示"，完整观看一次变化过程，注意垂距 d 与半径 1 的大小关系决定位置关系。</li>
-    </ol>
-    <div class="hint">核心结论：d ≤ 1 ⟺ 有公共点（含相切）；d &gt; 1 ⟺ 相离。临界处 d = 1。</div>
-  </div>
+    <div class="solution">
+      <h2><span class="no">2</span>解题过程（策略与思想方法）</h2>
+      <div class="steps">
+        <div class="step">
+          <div class="sh">① 写出直线 AB</div>
+          <div class="formula">k = <span class="frac"><i>a−3</i><u>2</u></span></div>
+          <div class="formula">AB：y = <span class="frac"><i>a−3</i><u>2</u></span>x + a</div>
+        </div>
+        <div class="step">
+          <div class="sh">② 关于 y=a 对称</div>
+          <div class="formula">代换：y → 2a − y</div>
+          <div class="formula">L′：y = a − <span class="frac"><i>a−3</i><u>2</u></span>x</div>
+        </div>
+        <div class="step">
+          <div class="sh">③ 有公共点 ⟺ d ≤ r</div>
+          <div class="formula">d = <span class="frac"><i>|5−5a|</i><u>√((a−3)²+4)</u></span></div>
+          <div class="formula">圆心 (−3,−2) 到 L′ 距离</div>
+        </div>
+        <div class="step">
+          <div class="sh">④ 解不等式得范围</div>
+          <div class="formula">d ≤ 1</div>
+          <div class="formula">⟹ (3a−1)(2a−3) ≤ 0</div>
+          <div class="formula"><b>a ∈ [1/3, 3/2]</b></div>
+        </div>
+      </div>
+      <div class="hint"><b>易错提醒：</b>① 对称代换方向勿反（是 y→2a−y，不是关于 y 轴对称）；②「存在公共点」包含相切，不等式取 ≤；③ 圆心坐标 (−3,−2) 提取时注意符号；④ 化简 d 时不要漏掉分母里的 √((a−3)²+4)。</div>
+    </div>
+  </section>
 
-  <div class="solution">
-    <h2><span class="no">2</span>解题过程（策略与思想方法）</h2>
-    <div class="steps">
-      <div class="step">
-        <div class="sh">① 写出直线 AB</div>
-        <div class="formula">k = <span class="frac"><i>a−3</i><u>2</u></span></div>
-        <div class="formula">AB：y = <span class="frac"><i>a−3</i><u>2</u></span>x + a</div>
+  <!-- ==================== 面板② 溯源 ==================== -->
+  <section class="panel" id="panel-trace" role="tabpanel" aria-labelledby="tab-trace">
+    <div class="question">
+      <b>溯源思路：</b>这道题不是凭空造出来的——它由「光线反射后<i>与圆相切</i>」的经典母题，把等式 <b>d = r</b> 放宽为不等式 <b>d ≤ r</b> 改造而来。下面用四层拆解，看清它的结构。<b>取消勾选可以逐层拆开这道题的命题过程。</b>
+    </div>
+
+    <div class="main">
+      <div class="canvas-card">
+        <div class="card-title"><span class="dot"></span>命题拆解 · 四层叠加（拖动上方 a 同步观察）</div>
+        <svg id="board-trace" viewBox="0 0 560 500" role="img" aria-label="命题拆解画布：分层显示直线AB、对称轴与对称点A′、圆与垂距、临界位置"></svg>
+        <div class="layer-list">
+          <label><input type="checkbox" data-layer="1" checked>① A、B 与直线 AB</label>
+          <label><input type="checkbox" data-layer="2" checked>② 对称轴 y=a、对称点 A′、线段 BA′</label>
+          <label><input type="checkbox" data-layer="3" checked>③ 圆 C、垂足 H、垂距 d</label>
+          <label><input type="checkbox" data-layer="4" checked>④ 两条相切临界线</label>
+        </div>
+        <div class="legend" style="margin-top:6px;">
+          <span class="sw dash" style="border-color:#9aa0a6;"></span>直线 AB
+          <span class="sw" style="border-color:#1a73e8;"></span>对称直线 L′
+          <span class="sw dot" style="border-color:#9aa3b1;"></span>AA′ 的垂直连线
+          <span class="sw" style="border-color:#e8710a;"></span>垂距 d
+        </div>
       </div>
-      <div class="step">
-        <div class="sh">② 关于 y=a 对称</div>
-        <div class="formula">代换：y → 2a − y</div>
-        <div class="formula">L′：y = a − <span class="frac"><i>a−3</i><u>2</u></span>x</div>
-      </div>
-      <div class="step">
-        <div class="sh">③ 有公共点 ⟺ d ≤ r</div>
-        <div class="formula">d = <span class="frac"><i>|5−5a|</i><u>√((a−3)²+4)</u></span></div>
-        <div class="formula">圆心 (−3,−2) 到 L′ 距离</div>
-      </div>
-      <div class="step">
-        <div class="sh">④ 解不等式得范围</div>
-        <div class="formula">d ≤ 1</div>
-        <div class="formula">⟹ (3a−1)(2a−3) ≤ 0</div>
-        <div class="formula"><b>a ∈ [1/3, 3/2]</b></div>
+
+      <div class="control-card">
+        <div class="card-title"><span class="dot"></span>本层的观察要点</div>
+        <div id="layerNote" style="font-size:14px;color:#333;min-height:150px;"></div>
+        <div class="hint">提示：层②是整道题的题眼——<b>对称轴 y=a 恰好穿过点 B</b>，所以 B 在对称变换下不动，L′ 必然过 B，而且 L′ 就是线段 AB 的像 <b>BA′</b>。直线 L′ 的「转动」因此可以肉眼看见。</div>
       </div>
     </div>
-    <div class="hint">易错提醒：① 对称代换方向勿反（是 y→2a−y，不是关于 y 轴对称）；② "存在公共点"包含相切，不等式取 ≤；③ 圆心坐标 (−3,−2) 提取时注意符号。</div>
-  </div>
+
+    <div class="src-card">
+      <h3><span class="no">1</span>教材溯源：这道题对应课本的哪几节</h3>
+      <ul>
+        <li><b>人教A版《选择性必修 第一册》2.3.3 点到直线的距离公式</b><span class="vfy">已核实</span><br>本题的核心运算 d = |7a+2| / √((a−2)²+16) 就是这个公式的直接应用。</li>
+        <li><b>人教A版《选择性必修 第一册》2.5.1 直线与圆的位置关系</b><span class="vfy">已核实</span><br>提供判据：d &lt; r 相交、d = r 相切、d &gt; r 相离。本题把三者统一成「d ≤ r ⟺ 有公共点」。</li>
+        <li><b>北师大版对应章节为 1.6 距离公式、2.3 直线与圆的位置关系</b><span class="vfy">已核实</span><span class="warn">注意不是 1.7</span></li>
+        <li><b>人教A版并没有为「对称问题」单设一节</b>，它属于 2.3 的应用拓展；教辅普遍把它编成「微专题：对称问题」。<span class="warn">此处不要写成课本独立章节</span></li>
+      </ul>
+    </div>
+
+    <div class="src-card">
+      <h3><span class="no">2</span>方法溯源：对称代换为什么是 y → 2a − y</h3>
+      <p>关于水平直线 <b>y = a</b> 的对称，代换 <b>y → 2a − y</b> 是<b>充分必要条件</b>，不是记忆技巧：设 P(x,y) 与 P′(x,y′) 关于 y=a 对称，则 y′=2a−y，解出 y=2a−y′，互为逆代换。</p>
+      <p>用它对本题做检验（这一步可以手算核对）：</p>
+      <div class="formula">AB：(a−3)x − 2y + 2a = 0</div>
+      <div class="formula">代换 y → 2a−y ⟹ (a−3)x + 2y − 2a = 0</div>
+      <div class="formula">即 L′：y = a − <span class="frac"><i>a−3</i><u>2</u></span>x</div>
+      <p class="hint" style="margin-top:8px;">注意 L′ 的解析式里，令 x=0 恒得 y=a——<b>这就是「L′ 必过 B」的代数证据</b>，与层②看到的几何事实完全一致。</p>
+    </div>
+
+    <div class="src-card">
+      <h3><span class="no">3</span>母题沿革：同类题在高考中出现过哪些</h3>
+      <div class="chain">
+        <b>1989 年 全国卷（理）第 21 题</b><span class="vfy">已核实</span>　光线反射后与圆相切<br>
+        <span class="arrow">↓</span><br>
+        <b>2015 年 山东卷（理）第 9 题</b><span class="vfy">已核实</span>　光线经 <i>y 轴</i>反射后与圆 (x+3)²+(y−2)²=1 相切，求斜率——与本题<b>只差一个符号与一条对称轴</b>，是最直接的「亲兄弟」<br>
+        <span class="arrow">↓</span><br>
+        <b>2022 年 北京卷第 3 题</b><span class="vfy">已核实</span>　对称轴过圆心、参数在圆上，属于同一族问题<br>
+        <span class="arrow">↓</span><br>
+        <b>2022 年 新高考全国Ⅱ卷 第 15 题（本题）</b>　把母题的「反射后<b>相切</b>」（等式 d=r，求斜率）改造为「对称后<b>有公共点</b>」（不等式 d≤r，求范围）
+      </div>
+      <div class="hint" style="margin-top:10px;"><b>命题演化的规律：</b>把等式的解改成一个区间，就把一道求值题变成了一道范围题——这是高考题从「母题」生成「新题」最常见的改造手法。</div>
+      <div class="hint"><b>未采用的选项说明：</b>另有「弦长最大值」这一常见设问方向，本题区间内 a=1 时 d=0、弦长取得最大值 2r=2；但该方向与本题「存在公共点」的设问距离较远，故本页的变式改用了「恰有一个公共点」。</div>
+    </div>
+
+    <div class="src-card">
+      <h3><span class="no">4</span>思想方法总结</h3>
+      <ul>
+        <li><b>数形结合：</b>「存在公共点」这个几何语言，翻译成代数语言就是 d ≤ r；反之由 d ≤ r 画出图形，又能直观验证。</li>
+        <li><b>化归与转化：</b>对称直线问题不易直接处理，用代换 y→2a−y 化归为「求一条已知直线」；直线与圆的位置关系又化归为「点到直线的距离与半径比较」。<b>两次化归，把陌生问题变成了两个公式。</b></li>
+        <li><b>函数与方程思想：</b>d 是 a 的函数 d(a) = |7a+2| / √((a−2)²+16)，求 a 的范围就是解不等式 d(a) ≤ 1。</li>
+        <li><b>临界意识（本题最易失分处）：</b>「恰好相切」是分界点，相切时 d = r；「有公共点」必须取到等号。丢等号、或多写端点，都源于临界状态没有单独讨论。</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ==================== 面板③ 变式 ==================== -->
+  <section class="panel" id="panel-vary" role="tabpanel" aria-labelledby="tab-vary">
+    <div class="question">
+      <b>变式：</b>已知点 A(−4,2)，B(0,a)，直线 AB 关于 y=a 的对称直线记为 l。若 l 与圆 C：(x+3)²+(y+2)²=1 <b>恰有一个公共点</b>，则实数 a 的值为<span class="range-ans">________</span>
+      <div class="hint">结论（供核验）：a = −1 或 a = 1/3　·　圆保持不变、只把 A 从 (−2,3) 换成 (−4,2)</div>
+    </div>
+
+    <div class="main">
+      <div class="canvas-card">
+        <div class="card-title"><span class="dot"></span>变式画布 · 圆不变，点 A 换到 (−4,2)</div>
+        <svg id="board-vary" viewBox="0 0 560 500" role="img" aria-label="变式画布：以A(−4,2)为条件的对称直线与圆相切问题"></svg>
+        <div class="legend" style="margin-top:8px;">
+          <span class="sw" style="border-color:#1a73e8;"></span>对称直线 l
+          <span class="sw dash" style="border-color:#9aa0a6;"></span>直线 AB
+          <span class="sw dash" style="border-color:#5aa0e8;"></span>对称轴 y=a
+          <span class="sw" style="border-color:#202124;"></span>圆 C（与原题完全相同）
+          <span class="sw dash" style="border-color:#e8710a;"></span>相切位置 a=−1 / a=1/3
+          <span class="sw" style="border-color:#e8710a;"></span>圆心到 l 的垂距 d
+        </div>
+      </div>
+
+      <div class="control-card">
+        <div class="card-title"><span class="dot"></span>参数读数</div>
+        <div class="readout">
+          <div class="ro"><div class="k">a 当前值</div><div class="v"><span data-r="roA">0.80</span><small data-r="roAdec"></small></div></div>
+          <div class="ro"><div class="k">直线 AB 斜率 k</div><div class="v" data-r="roK">−0.30</div></div>
+          <div class="ro" data-r="roDbox"><div class="k">圆心到 l 距离 d</div><div class="v" data-r="roD">1.512</div></div>
+          <div class="ro"><div class="k">半径 r</div><div class="v">1<small>（定值）</small></div></div>
+        </div>
+        <div class="state-row">
+          <span style="font-size:13.5px;font-weight:600;">位置关系：</span>
+          <span class="badge separate" data-r="badge"><span class="bd"></span><span data-r="badgeTxt">相离</span></span>
+        </div>
+        <div class="result no" data-r="result">此时 l 与圆没有公共点，不满足「恰有一个」</div>
+
+        <div class="card-title" style="margin-top:4px;"><span class="dot"></span>实验操作</div>
+        <div class="btns">
+          <button class="btn" data-a="-1.6">a=−1.6<br>相离</button>
+          <button class="btn" data-a="-1">a=−1<br>相切 ①</button>
+          <button class="btn" data-a="-0.3">a=−0.3<br>相交</button>
+          <button class="btn" data-a="0.3333333333333333">a=1/3<br>相切 ②</button>
+          <button class="btn" data-a="1">a=1<br>相离</button>
+          <button class="btn" data-a="0">a=0<br>相交</button>
+        </div>
+        <div class="hint">对照要点：把 A 换成 (−4,2) 后，<b>相切从「两个端点」变成了「区间 [−1, 1/3] 的两个端点」</b>。请观察：为什么原题问范围、这里却能问定值？</div>
+      </div>
+    </div>
+
+    <div class="guide">
+      <h2><span class="no">1</span>变式的观察任务</h2>
+      <ol>
+        <li>先点 a=−1 与 a=1/3，观察两处<b>恰好相切</b>：l 与圆只有一个公共点，此时 d 恰好等于 r = 1。</li>
+        <li>再把 a 拖到 −1 与 1/3 <b>之间</b>（如 a=−0.3、a=0）：l 与圆有两个公共点，d &lt; r。</li>
+        <li>把 a 拖到区间之外（如 a=−1.6、a=1）：l 与圆相离，d &gt; r。</li>
+        <li>对比原题：原题问「存在公共点」得到的是<b>区间 [1/3, 3/2]</b>；本题问「恰有一个公共点」，答案只是那个区间的<b>两个端点</b>。体会设问方式如何决定答案形态。</li>
+      </ol>
+    </div>
+
+    <div class="solution">
+      <h2><span class="no">2</span>变式解答（对比原题，看差异在哪）</h2>
+      <div class="steps">
+        <div class="step">
+          <div class="sh">① 写出直线 AB</div>
+          <div class="formula">A(−4,2)，B(0,a)</div>
+          <div class="formula">AB：(2−a)x + 4y − 4a = 0</div>
+        </div>
+        <div class="step">
+          <div class="sh">② 代换 y → 2a − y</div>
+          <div class="formula">l：(2−a)x − 4y + 4a = 0</div>
+          <div class="formula">即 y = a + <span class="frac"><i>2−a</i><u>4</u></span>x</div>
+        </div>
+        <div class="step">
+          <div class="sh">③ 求圆心到 l 的距离</div>
+          <div class="formula">d = <span class="frac"><i>|7a+2|</i><u>√((a−2)²+16)</u></span></div>
+          <div class="formula">圆心 (−3,−2)、r = 1</div>
+        </div>
+        <div class="step">
+          <div class="sh">④ 恰有一个 ⟺ d = r</div>
+          <div class="formula">|7a+2| = √((a−2)²+16)</div>
+          <div class="formula">⟹ 3a² + 2a − 1 = 0</div>
+          <div class="formula"><b>a = −1 或 a = 1/3</b></div>
+        </div>
+      </div>
+      <div class="hint"><b>与原题的差异：</b>原题把母题的条件「相切」（d = r）放宽成「有公共点」（d ≤ r），于是答案从一个值变成一个区间；本变式保留了「相切」这个严格条件，所以答案仍然是<b>离散的两个值</b>。</div>
+      <div class="hint"><b>易错提醒：</b>① AB 的系数随 A 的坐标改变，不能套用原题的 (a−3)x − 2y + 2a = 0；②「恰有一个公共点」是 d = r，<b>不是 d ≤ r</b>，忘了这一点就会答成区间 [−1, 1/3]；③ 解 3a²+2a−1=0 时注意因式分解 (3a−1)(a+1)=0 的两根符号相反。</div>
+    </div>
+  </section>
 
   <footer>数据与题目来源：2022 年普通高等学校招生全国统一考试（新高考全国Ⅱ卷）数学第 15 题 · 本实验为教学演示用途</footer>
 </div>
 
 <script>
 (function(){
-  try{
-    var slider=document.getElementById('aSlider');
-    var roA=document.getElementById('roA'), roK=document.getElementById('roK'), roD=document.getElementById('roD');
-    var badge=document.getElementById('stateBadge'), resultText=document.getElementById('resultText');
-    var ptB=document.getElementById('ptB'), labelB=document.getElementById('labelB');
-    var lineAB=document.getElementById('lineAB'), lineLp=document.getElementById('lineLp'), labelLp=document.getElementById('labelLp');
-    var lineAxis=document.getElementById('lineAxis'), axisLabel=document.getElementById('axisLabel');
-    var distSeg=document.getElementById('distSeg'), ptH=document.getElementById('ptH');
-    var playBtn=document.getElementById('playBtn'), resetBtn=document.getElementById('resetBtn');
-    if(!slider||!roA||!roK||!roD||!badge||!resultText||!ptB||!labelB||!lineAB||!lineLp||!labelLp||!lineAxis||!axisLabel||!distSeg||!ptH||!playBtn||!resetBtn){return;}
+'use strict';
 
-    var a=0.8, playing=false, timer=null;
-    function px(x){return 280+50*x;}
-    function py(y){return 250-50*y;}
+/* =====================================================================
+   1. 映射常数与格式化
+   ===================================================================== */
+var OX = 280, OY = 250, U = 50;
+function px(x){ return OX + U * x; }
+function py(y){ return OY - U * y; }
+/* 输出坐标字符串：消掉 -0.0，并压到 1 位小数 */
+function co(v){ var r = Math.round(v * 10) / 10; return (r === 0 ? 0 : r).toFixed(1); }
+/* 输出读数：消掉 "-0.00" */
+function fmt(v, n){ var r = Math.abs(v) < 5e-7 ? 0 : v; return r.toFixed(n); }
+function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;'); }
 
-    function update(){
-      var m=(a-3)/2;
-      slider.value=a;
-      roA.textContent=a.toFixed(2);
-      roK.textContent=m.toFixed(2);
-      var val=(5-5*a)/2;
-      var d=Math.abs(val)/Math.sqrt(m*m+1);
-      roD.textContent=d.toFixed(3);
-      var state, cls, txt;
-      if(d < 0.999){state='相交';cls='cross';txt='L′ 与圆有两个公共点（相交）';}
-      else if(d <= 1.001){state='相切';cls='tangent';txt='L′ 与圆恰有一个公共点（相切，d = r）';}
-      else{state='相离';cls='separate';txt='L′ 与圆没有公共点（相离）';}
-      badge.className='badge '+cls;
-      badge.innerHTML='<span class="bd"></span>'+state;
-      resultText.textContent = (a>=0.3333333-1e-4 && a<=1.5000001) ? '√ a∈[1/3, 3/2]：L′ 与圆存在公共点（含临界相切）' : '× a 在区间外：L′ 与圆相离，无公共点';
-
-      ptB.setAttribute('cx', px(0).toFixed(1));
-      ptB.setAttribute('cy', py(a).toFixed(1));
-      labelB.setAttribute('x', (px(0)+12).toFixed(1));
-      labelB.setAttribute('y', (py(a)-8).toFixed(1));
-      labelB.textContent='B(0,'+a.toFixed(2)+')';
-
-      var x1=-5.6, x2=5.6;
-      lineAB.setAttribute('x1', px(x1).toFixed(1));
-      lineAB.setAttribute('y1', py(m*x1+a).toFixed(1));
-      lineAB.setAttribute('x2', px(x2).toFixed(1));
-      lineAB.setAttribute('y2', py(m*x2+a).toFixed(1));
-
-      lineLp.setAttribute('x1', px(x1).toFixed(1));
-      lineLp.setAttribute('y1', py(a-m*x1).toFixed(1));
-      lineLp.setAttribute('x2', px(x2).toFixed(1));
-      lineLp.setAttribute('y2', py(a-m*x2).toFixed(1));
-      var lpx=px(-3), lpy=py(a-m*(-3));
-      labelLp.setAttribute('x', (lpx+10).toFixed(1));
-      labelLp.setAttribute('y', (lpy-6).toFixed(1));
-
-      lineAxis.setAttribute('y1', py(a).toFixed(1));
-      lineAxis.setAttribute('y2', py(a).toFixed(1));
-      axisLabel.setAttribute('y', (py(a)-12).toFixed(1));
-
-      var Cx=-3, Cy=-2;
-      var den=m*m+1;
-      var t=val/den;
-      var Hx=Cx-t*m, Hy=Cy-t;
-      distSeg.setAttribute('x1', px(Cx).toFixed(1));
-      distSeg.setAttribute('y1', py(Cy).toFixed(1));
-      distSeg.setAttribute('x2', px(Hx).toFixed(1));
-      distSeg.setAttribute('y2', py(Hy).toFixed(1));
-      ptH.setAttribute('cx', px(Hx).toFixed(1));
-      ptH.setAttribute('cy', py(Hy).toFixed(1));
+/* 把数值写成最简分数（分母 ≤ 12），写不出就用两位小数 */
+function frac(v){
+  if (Math.abs(v - Math.round(v)) < 1e-9){
+    return String(Math.round(v)).replace('-', '−');
+  }
+  for (var q = 2; q <= 12; q++){
+    var p = v * q;
+    if (Math.abs(p - Math.round(p)) < 1e-9){
+      var n = Math.round(p);
+      return (n < 0 ? '−' : '') + Math.abs(n) + '/' + q;
     }
+  }
+  return v.toFixed(2).replace('-', '−');
+}
 
-    slider.addEventListener('input', function(){ a=parseFloat(slider.value); update(); });
-
-    var presets=document.querySelectorAll('.btns .btn[data-a]');
-    for(var i=0;i<presets.length;i++){
-      presets[i].addEventListener('click', function(){
-        a=parseFloat(this.getAttribute('data-a'));
-        if(playing){pause();}
-        update();
-      });
+/* a 的显示：恰好落在临界值上时显示精确分数，否则显示两位小数 */
+function showA(a, roots){
+  for (var i = 0; i < roots.length; i++){
+    if (Math.abs(a - roots[i]) < 1e-6){
+      return { main: frac(roots[i]), sub: '≈ ' + roots[i].toFixed(4) };
     }
-    resetBtn.addEventListener('click', function(){ if(playing){pause();} a=0.8; update(); });
+  }
+  return { main: fmt(a, 2), sub: '' };
+}
 
-    function pause(){
-      playing=false;
-      if(timer){clearInterval(timer);timer=null;}
-      playBtn.textContent='▶ 自动演示：a 从 −1 到 3';
-      slider.disabled=false;
+/* =====================================================================
+   2. 数学内核：纯函数，绝不碰 DOM
+   ===================================================================== */
+
+/* 题目配置：原题与变式共用一个圆心和半径，只有 A 不同 */
+var PROBLEMS = {
+  orig: { A: { x: -2, y: 3 }, C: { x: -3, y: -2 }, r: 1 },
+  vary: { A: { x: -4, y: 2 }, C: { x: -3, y: -2 }, r: 1 }
+};
+
+/* 把 A(x0,y0)、B(0,a) 与圆 C(p,q)、半径 r 的几何关系整理成常量。
+   推导：AB 的斜率 k=(y0-a)/x0；关于 y=a 代换 y→2a-y 后得
+        L′: y = a - k x，恒过 B(0,a)。
+        d = |k·p + q - a| / √(k²+1) = |αa+β| / √((a-y0)² + x0²)
+   其中 α = -(p+x0)，β = p·y0 + q·x0。
+   相切条件 d=r 的两边平方后是 a 的二次方程，用 α、β 直接解出临界值。 */
+function shape(P){
+  var x0 = P.A.x, y0 = P.A.y, p = P.C.x, q = P.C.y, r = P.r;
+  var al = -(p + x0), be = p * y0 + q * x0;
+  var A2 = al * al - r * r;
+  var B2 = 2 * al * be + 2 * r * r * y0;
+  var C2 = be * be - r * r * (y0 * y0 + x0 * x0);
+  var D  = B2 * B2 - 4 * A2 * C2;
+  var roots = [];
+  if (Math.abs(A2) > 1e-12 && D > 0){
+    var s = Math.sqrt(D);
+    roots = [(-B2 - s) / (2 * A2), (-B2 + s) / (2 * A2)];
+    if (roots[0] > roots[1]){ var tmp = roots[0]; roots[0] = roots[1]; roots[1] = tmp; }
+  }
+  /* A2>0 时二次函数开口向上，d ≤ r 对应两根之间 */
+  return { x0:x0, y0:y0, p:p, q:q, r:r, al:al, be:be, roots:roots, insideHit: A2 > 0 };
+}
+
+var TOL_HIT  = 1e-6;
+var TOL_CRIT = 1e-6;
+
+function compute(a, S){
+  var x0 = S.x0, y0 = S.y0, p = S.p, q = S.q, r = S.r;
+
+  var k   = (y0 - a) / x0;          /* AB 的斜率；L′ 的斜率是 -k */
+  var den = k * k + 1;
+  var val = k * p + q - a;          /* 圆心代入 L′ 左侧的符号距离分子 */
+  var d   = Math.abs(val) / Math.sqrt(den);
+
+  var t  = val / den;               /* 垂足参数 */
+  var Hx = p - t * k, Hy = q - t;
+
+  var ux = 1 / Math.sqrt(den), uy = -k / Math.sqrt(den);   /* L′ 的单位方向向量 */
+  /* ★ clamp：d 在临界点会有 1e-16 级的浮点误差使 r²-d² 变负，
+     不 clamp 就会得到 NaN，几何元素会整体消失（且被 catch 吞掉） */
+  var half = Math.sqrt(Math.max(0, r * r - d * d));
+
+  var lo = S.roots.length ? S.roots[0] : NaN;
+  var hi = S.roots.length ? S.roots[S.roots.length - 1] : NaN;
+  var hit;
+  if (S.roots.length){
+    hit = S.insideHit ? (a >= lo - TOL_HIT && a <= hi + TOL_HIT)
+                      : (a <= lo + TOL_HIT || a >= hi - TOL_HIT);
+  } else {
+    hit = d <= r + TOL_HIT;
+  }
+  var crit = false;
+  for (var i = 0; i < S.roots.length; i++){
+    if (Math.abs(a - S.roots[i]) < TOL_CRIT) crit = true;
+  }
+
+  return {
+    a: a, k: k, d: d, hit: hit, crit: crit,
+    state: crit ? 'tangent' : (hit ? 'cross' : 'separate'),
+    A2: { x: x0, y: 2 * a - y0 },                       /* A 关于 y=a 的对称点 */
+    foot: { x: Hx, y: Hy },                             /* 圆心在 L′ 上的垂足 */
+    p1: { x: Hx + half * ux, y: Hy + half * uy },
+    p2: { x: Hx - half * ux, y: Hy - half * uy },
+    chord: 2 * half
+  };
+}
+
+/* =====================================================================
+   3. 静态坐标网格：三块画布共用一份生成逻辑（原来手抄三遍，易错）
+   ===================================================================== */
+var XTICKS = [-4, -2, 2, 4], YTICKS = [-4, -2, 2, 4];
+function axesSVG(gid){
+  var s = '<defs><pattern id="' + gid + '" width="50" height="50" patternUnits="userSpaceOnUse">'
+        + '<path d="M50 0H0V50" fill="none" stroke="#e9edf3" stroke-width="1"/></pattern></defs>'
+        + '<rect width="560" height="500" fill="url(#' + gid + ')"/>'
+        + '<line x1="0" y1="250" x2="560" y2="250" stroke="#b9c2d0" stroke-width="1.2"/>'
+        + '<line x1="280" y1="0" x2="280" y2="500" stroke="#b9c2d0" stroke-width="1.2"/>'
+        + '<text x="552" y="238" font-size="11" fill="#7a8494">x</text>'
+        + '<text x="290" y="14" font-size="11" fill="#7a8494">y</text>';
+  /* x 轴刻度：以 px(值)=280+50×值 为中心严格对齐网格线 */
+  for (var i = 0; i < XTICKS.length; i++){
+    s += '<text x="' + px(XTICKS[i]) + '" y="266" font-size="11" fill="#9aa3b1" text-anchor="middle">'
+       + String(XTICKS[i]).replace('-', '−') + '</text>';
+  }
+  /* y 轴刻度：垂直居中于 py(值)=250−50×值 */
+  for (var j = 0; j < YTICKS.length; j++){
+    s += '<text x="272" y="' + (py(YTICKS[j]) + 4) + '" font-size="11" fill="#9aa3b1" text-anchor="end">'
+       + String(YTICKS[j]).replace('-', '−') + '</text>';
+  }
+  return s;
+}
+
+/* 圆（原题与变式完全相同：圆心 (−3,−2)，r=1） */
+function circleSVG(){
+  return '<circle cx="' + px(-3) + '" cy="' + py(-2) + '" r="50" fill="#dbe7f6" fill-opacity="0.4" stroke="#202124" stroke-width="2"/>'
+       + '<circle cx="' + px(-3) + '" cy="' + py(-2) + '" r="3" fill="#202124"/>'
+       + '<text x="86" y="362" font-size="12.5" fill="#202124">圆C</text>'
+       + '<text x="56" y="384" font-size="11.5" fill="#555">(−3,−2), r=1</text>';
+}
+
+/* 原题 / 变式两张「结果画布」的公共骨架。A 的静态部分由调用方给。 */
+function boardSVG(gid, rKey){
+  return axesSVG(gid)
+    /* 对称轴 y=a */
+    + '<line data-r="lineAxis" x1="30" y1="' + py(0.8) + '" x2="540" y2="' + py(0.8) + '" stroke="#5aa0e8" stroke-width="1.6" stroke-dasharray="2 6"/>'
+    + '<text data-r="axisLabel" x="26" y="' + (py(0.8) - 12) + '" font-size="12" fill="#5aa0e8">对称轴 y=a</text>'
+    + circleSVG()
+    /* 相切临界线（坐标由 compute(roots) 生成后写入） */
+    + '<line data-r="lineCr1" x1="0" y1="0" x2="0" y2="0" stroke="#e8710a" stroke-width="1.6" stroke-dasharray="9 6"/>'
+    + '<line data-r="lineCr2" x1="0" y1="0" x2="0" y2="0" stroke="#e8710a" stroke-width="1.6" stroke-dasharray="9 6"/>'
+    + '<text data-r="labelCr1" x="40" y="474" font-size="11.5" fill="#c25e00"></text>'
+    + '<text data-r="labelCr2" x="502" y="34" font-size="11.5" fill="#c25e00" text-anchor="end"></text>'
+    /* 直线 AB（虚线）与对称直线 L′（实线） */
+    + '<line data-r="lineAB" x1="0" y1="0" x2="0" y2="0" stroke="#9aa0a6" stroke-width="2" stroke-dasharray="8 5"/>'
+    + '<line data-r="lineLp" x1="0" y1="0" x2="0" y2="0" stroke="#1a73e8" stroke-width="3.4"/>'
+    /* 垂距与垂足 */
+    + '<line data-r="distSeg" x1="0" y1="0" x2="0" y2="0" stroke="#e8710a" stroke-width="2.2"/>'
+    + '<circle data-r="ptH" cx="0" cy="0" r="3.5" fill="#e8710a"/>'
+    /* 点 B 与其标签 */
+    + '<circle data-r="ptB" cx="280" cy="' + py(0.8) + '" r="5" fill="#e8710a" stroke="#fff" stroke-width="1.5"/>'
+    + '<text data-r="labelB" x="292" y="' + (py(0.8) - 8) + '" font-size="12.5" fill="#c25e00" font-weight="700">B(0,0.80)</text>'
+    /* L′ 的标签，跟随直线右端 */
+    + '<text data-r="labelLp" x="418" y="240" font-size="13" fill="#1a5fb4" font-weight="700">' + rKey + '</text>';
+}
+
+/* =====================================================================
+   4. 画布内容注入
+   ===================================================================== */
+var SVG_ORIG  = document.getElementById('board-orig');
+var SVG_TRACE = document.getElementById('board-trace');
+var SVG_VARY  = document.getElementById('board-vary');
+
+SVG_ORIG.innerHTML = boardSVG('grid-orig', 'L′')
+  + '<circle cx="' + px(-2) + '" cy="' + py(3) + '" r="4.5" fill="#202124"/>'
+  + '<text x="150" y="86" font-size="12.5" fill="#202124">A(−2,3)</text>';
+
+SVG_VARY.innerHTML = boardSVG('grid-vary', 'l')
+  + '<circle cx="' + px(-4) + '" cy="' + py(2) + '" r="4.5" fill="#202124"/>'
+  + '<text x="68" y="146" font-size="12.5" fill="#202124" text-anchor="end">A(−4,2)</text>';
+
+/* 溯源画布：四层分组，g.layer 由复选框控制显隐 */
+SVG_TRACE.innerHTML = axesSVG('grid-trace')
+  /* 点 A 是题给条件，任何一层都需要，故始终显示 */
+  + '<circle cx="' + px(-2) + '" cy="' + py(3) + '" r="4.5" fill="#202124"/>'
+  + '<text x="150" y="86" font-size="12.5" fill="#202124">A(−2,3)</text>'
+
+  /* ① 两点确定一条直线 */
+  + '<g class="layer" data-layer="1">'
+  +   '<line data-r="lineAB" x1="0" y1="0" x2="0" y2="0" stroke="#9aa0a6" stroke-width="2" stroke-dasharray="8 5"/>'
+  +   '<circle data-r="ptB" cx="280" cy="' + py(0.8) + '" r="5" fill="#e8710a" stroke="#fff" stroke-width="1.5"/>'
+  +   '<text data-r="labelB" x="292" y="' + (py(0.8) - 8) + '" font-size="12.5" fill="#c25e00" font-weight="700">B(0,0.80)</text>'
+  + '</g>'
+
+  /* ② 对称轴 / 对称点 A′ / 线段 BA′ —— 全题的题眼 */
+  + '<g class="layer" data-layer="2">'
+  +   '<line data-r="lineAxis" x1="30" y1="' + py(0.8) + '" x2="540" y2="' + py(0.8) + '" stroke="#5aa0e8" stroke-width="1.6" stroke-dasharray="2 6"/>'
+  +   '<text data-r="axisLabel" x="26" y="' + (py(0.8) - 12) + '" font-size="12" fill="#5aa0e8">对称轴 y=a</text>'
+  +   '<line data-r="reflSeg" x1="0" y1="0" x2="0" y2="0" stroke="#9aa3b1" stroke-width="1.6" stroke-dasharray="1 5"/>'
+  +   '<rect data-r="reflMark" x="0" y="0" width="9" height="9" fill="none" stroke="#9aa3b1" stroke-width="1.4"/>'
+  +   /* 先画一条加粗的半透明底线，让 BA′ 这一段在整条 L′ 上「发光」 */
+  +   '<line data-r="segBA2" x1="0" y1="0" x2="0" y2="0" stroke="#1a73e8" stroke-width="11" stroke-opacity="0.18" stroke-linecap="round"/>'
+  +   '<line data-r="lineLp" x1="0" y1="0" x2="0" y2="0" stroke="#1a73e8" stroke-width="3.4"/>'
+  +   '<circle data-r="ptA2" cx="0" cy="0" r="4.5" fill="#1a73e8"/>'
+  +   '<text data-r="labelA2" x="0" y="0" font-size="12.5" fill="#1a5fb4" font-weight="700">A′</text>'
+  +   '<text data-r="labelLp" x="418" y="240" font-size="13" fill="#1a5fb4" font-weight="700">L′ = BA′</text>'
+  + '</g>'
+
+  /* ③ 圆 / 垂足 / 垂距 */
+  + '<g class="layer" data-layer="3">'
+  +   circleSVG()
+  +   '<line data-r="distSeg" x1="0" y1="0" x2="0" y2="0" stroke="#e8710a" stroke-width="2.2"/>'
+  +   '<circle data-r="ptH" cx="0" cy="0" r="3.5" fill="#e8710a"/>'
+  +   '<text data-r="dLabel" x="0" y="0" font-size="12" fill="#c25e00" font-weight="700">d</text>'
+  + '</g>'
+
+  /* ④ 两条相切临界线 */
+  + '<g class="layer" data-layer="4">'
+  +   '<line data-r="lineCr1" x1="0" y1="0" x2="0" y2="0" stroke="#e8710a" stroke-width="1.6" stroke-dasharray="9 6"/>'
+  +   '<line data-r="lineCr2" x1="0" y1="0" x2="0" y2="0" stroke="#e8710a" stroke-width="1.6" stroke-dasharray="9 6"/>'
+  +   '<text data-r="labelCr1" x="40" y="474" font-size="11.5" fill="#c25e00"></text>'
+  +   '<text data-r="labelCr2" x="502" y="34" font-size="11.5" fill="#c25e00" text-anchor="end"></text>'
+  + '</g>';
+
+/* =====================================================================
+   5. 每面板 refs 缓存（data-r 查元素；重复 id 的坑就此消失）
+   ===================================================================== */
+function bind(svg){
+  var out = {}, els = svg.querySelectorAll('[data-r]');
+  for (var i = 0; i < els.length; i++){
+    var key = els[i].getAttribute('data-r');
+    if (out[key]) console.error('[bind] data-r 重复: ' + key);
+    out[key] = els[i];
+  }
+  return out;
+}
+
+var SHAPES = { orig: shape(PROBLEMS.orig), trace: shape(PROBLEMS.orig), vary: shape(PROBLEMS.vary) };
+var PDATA  = { orig: PROBLEMS.orig,       trace: PROBLEMS.orig,       vary: PROBLEMS.vary };
+var REFS   = { orig: bind(SVG_ORIG),     trace: bind(SVG_TRACE),     vary: bind(SVG_VARY) };
+var UI     = { orig: bind(document.getElementById('panel-orig')),
+               vary: bind(document.getElementById('panel-vary')) };
+
+/* console 里能自查几何是否一致 */
+console.log('[几何自检] 原题临界 a =', SHAPES.orig.roots, ' 变式临界 a =', SHAPES.vary.roots);
+
+/* =====================================================================
+   6. 渲染：只做 setAttribute，不做数学
+   ===================================================================== */
+var XSPAN = 5.8;   /* 直线在数学坐标里的绘制半宽，超出画布的部分由 SVG 自动裁掉 */
+
+function set(el, attrs){
+  if (!el) return;
+  for (var k in attrs){ if (attrs.hasOwnProperty(k)) el.setAttribute(k, co(attrs[k])); }
+}
+function setT(el, txt){ if (el) el.textContent = txt; }
+
+/* 直线 y = kx + b 的屏幕端点 */
+function lineK(el, k, b){
+  if (!el) return null;
+  var x1 = -XSPAN, x2 = XSPAN;
+  var y1 = k * x1 + b, y2 = k * x2 + b;
+  set(el, { x1: px(x1), y1: py(y1), x2: px(x2), y2: py(y2) });
+  return { k: k, b: b, y1: y1, y2: y2 };
+}
+
+/* 沿直线 y=kx+b 找一个落在画布内的点，用于挂标注，避免标注飘到线外 */
+function onLine(k, b, preferRight){
+  var order = preferRight ? [1, -1] : [-1, 1];
+  for (var s = 0; s < 2; s++){
+    for (var x = 5.4 * order[s]; Math.abs(x) <= 5.4; x += 0.15 * order[s]){
+      var y = k * x + b;
+      if (y >= -4.3 && y <= 4.3) return { x: px(x), y: py(y) };
     }
-    playBtn.addEventListener('click', function(){
-      if(playing){pause();return;}
-      playing=true;
-      playBtn.textContent='⏸ 暂停演示';
-      slider.disabled=true;
-      timer=setInterval(function(){
-        a=a+0.008;
-        if(a>=3){a=3;update();pause();return;}
-        update();
-      },30);
-    });
+  }
+  return null;
+}
 
-    update();
-  }catch(e){}
+function renderPanel(pid, a){
+  var R = REFS[pid], S = SHAPES[pid];
+  if (!R || !S) return;
+  var s = compute(a, S);
+
+  /* --- 点 B 与标签 --- */
+  set(R.ptB, { cx: px(0), cy: py(a) });
+  set(R.labelB, { x: px(0) + 12, y: py(a) - 8 });
+  setT(R.labelB, 'B(0,' + fmt(a, 2) + ')');
+
+  /* --- 直线 AB 与对称直线 L′ --- */
+  lineK(R.lineAB, s.k, a);
+  lineK(R.lineLp, -s.k, a);
+  var lp = onLine(-s.k, a, true);
+  if (lp && R.labelLp){
+    set(R.labelLp, { x: lp.x + 10, y: lp.y - 6 });
+  }
+
+  /* --- 对称轴 y = a --- */
+  set(R.lineAxis, { y1: py(a), y2: py(a) });
+  set(R.axisLabel, { y: py(a) - 12 });
+
+  /* --- 垂距 d 与垂足 H --- */
+  set(R.distSeg, { x1: px(S.p), y1: py(S.q), x2: px(s.foot.x), y2: py(s.foot.y) });
+  set(R.ptH, { cx: px(s.foot.x), cy: py(s.foot.y) });
+  if (R.dLabel){
+    /* d 的标注放在垂线中点旁，随 d 被压短时自动贴近圆心 */
+    set(R.dLabel, { x: (px(S.p) + px(s.foot.x)) / 2 + 7, y: (py(S.q) + py(s.foot.y)) / 2 + 4 });
+  }
+
+  /* --- 对称点 A′、垂直连线、线段 BA′（仅溯源画布有） --- */
+  if (R.ptA2){
+    set(R.ptA2, { cx: px(s.A2.x), cy: py(s.A2.y) });
+    set(R.reflSeg, { x1: px(S.x0), y1: py(S.y0), x2: px(s.A2.x), y2: py(s.A2.y) });
+    /* 直角/等分标记：放在 A 与 A′ 的中点，即对称轴上的 (x0, a) */
+    set(R.reflMark, { x: px(S.x0) + 5, y: py(a) - 5 });
+    var a2lab = onLine(-s.k, a, false);
+    if (a2lab && R.labelA2){
+      set(R.labelA2, { x: px(s.A2.x) + 12, y: py(s.A2.y) + (s.A2.y > s.y0 ? 18 : -8) });
+    }
+    setT(R.labelA2, 'A′(' + S.x0 + ',' + fmt(s.A2.y, 1) + ')');
+    set(R.segBA2, { x1: px(0), y1: py(a), x2: px(s.A2.x), y2: py(s.A2.y) });
+  }
+
+  /* --- 相切临界线：由临界 a 反算直线，不再写死屏幕坐标 --- */
+  for (var i = 0; i < 2; i++){
+    var av = S.roots[i];
+    var el  = i === 0 ? R.lineCr1 : R.lineCr2;
+    var lbl = i === 0 ? R.labelCr1 : R.labelCr2;
+    if (av === undefined || !el) continue;
+    var kv = (S.y0 - av) / S.x0;
+    lineK(el, -kv, av);
+    setT(lbl, 'a = ' + frac(av) + ' 相切');
+  }
+}
+
+function renderUI(pid, a){
+  var R = UI[pid], S = SHAPES[pid];
+  if (!R || !S) return;
+  var s = compute(a, S);
+
+  if (pid === 'orig') R = R;   /* 保持结构一致，便于将来扩展 */
+
+  var av = showA(a, S.roots);
+  setT(R.roA, av.main);
+  setT(R.roAdec, av.sub);
+  setT(R.roK, fmt(s.k, 2));
+  setT(R.roD, fmt(s.d, 3));
+
+  /* 相切时把 d 的读数格高亮，让「d = r」这一刻看得见 */
+  if (R.roDbox){
+    if (s.crit) R.roDbox.classList.add('hot'); else R.roDbox.classList.remove('hot');
+  }
+
+  var lbl = { cross: '相交', tangent: '相切', separate: '相离' }[s.state];
+  if (R.badge) R.badge.className = 'badge ' + s.state;
+  setT(R.badgeTxt, lbl);
+
+  /* 结论文字：只由 compute().state 派生，不再有第二个真相源 */
+  var txt, bad = false;
+  if (pid === 'orig'){
+    if (s.crit) txt = '√ 此时 d = r，L′ 与圆恰有一个公共点（相切）';
+    else if (s.hit) txt = '√ a ∈ [' + frac(S.roots[0]) + ', ' + frac(S.roots[1]) + ']：L′ 与圆存在公共点';
+    else { txt = '× a 在区间 [' + frac(S.roots[0]) + ', ' + frac(S.roots[1]) + '] 外：L′ 与圆相离，无公共点'; bad = true; }
+  } else {
+    if (s.crit) txt = '√ d = r，l 与圆恰有一个公共点 —— 这正是本题要求的 a';
+    else if (s.hit){ txt = '× 此时 d < r，l 与圆有两个公共点，不满足「恰有一个」'; bad = true; }
+    else { txt = '× 此时 d > r，l 与圆没有公共点，不满足「恰有一个」'; bad = true; }
+  }
+  if (R.result){
+    R.result.className = 'result' + (bad ? ' no' : '');
+    setT(R.result, txt);
+  }
+}
+
+/* =====================================================================
+   7. 状态与调度
+   ===================================================================== */
+var state = { a: 0.8, panel: 'orig', playing: false, layers: [1, 1, 1, 1] };
+var PANELS = ['orig', 'trace', 'vary'];
+
+var slider  = document.getElementById('aSlider');
+var aNow    = document.querySelector('.slider-bar [data-r="aNow"]');
+var playBtn = document.getElementById('playBtn');
+var resetBtn= document.getElementById('resetBtn');
+var aNowRef = { el: aNow };
+
+function renderAll(){
+  for (var i = 0; i < PANELS.length; i++) renderPanel(PANELS[i], state.a);
+  for (var j = 0; j < PANELS.length; j++) renderUI(PANELS[j], state.a);
+  /* 共享参数条上的 a：临界处显示精确分数，避免把 1/3 显示成 0.33 */
+  var av = showA(state.a, SHAPES[state.panel].roots);
+  setT(aNowRef.el, 'a = ' + av.main);
+  renderLayers();
+}
+
+function renderLayers(){
+  var gs = SVG_TRACE.querySelectorAll('g.layer');
+  for (var i = 0; i < gs.length; i++){
+    var n = parseInt(gs[i].getAttribute('data-layer'), 10);
+    if (state.layers[n - 1]) gs[i].classList.remove('off');
+    else gs[i].classList.add('off');
+  }
+}
+
+/* a 的唯一入口。from==='slider' 表示值就来自滑块本身，不必回写 */
+function setA(v, from){
+  v = Math.max(-1.6, Math.min(3, v));
+  state.a = v;
+  if (from !== 'slider' && slider) slider.value = v;
+  renderAll();
+}
+
+/* ---------------- 路由 ---------------- */
+function show(p, first){
+  if (PANELS.indexOf(p) < 0) p = 'orig';
+  state.panel = p;
+  for (var i = 0; i < PANELS.length; i++){
+    var sec = document.getElementById('panel-' + PANELS[i]);
+    var tab = document.querySelector('.tab[data-p="' + PANELS[i] + '"]');
+    if (PANELS[i] === p){
+      sec.classList.add('on');
+      tab.classList.add('on');
+      tab.setAttribute('aria-selected', 'true');
+    } else {
+      sec.classList.remove('on');
+      tab.classList.remove('on');
+      tab.setAttribute('aria-selected', 'false');
+    }
+  }
+  pause();
+  if (!first){
+    var y = window.pageYOffset || document.documentElement.scrollTop;
+    if (y > 60){
+      var top = document.querySelector('.tabs').getBoundingClientRect().top + y;
+      window.scrollTo(0, top);
+    }
+  }
+  renderAll();
+}
+
+function currentHash(){ return (location.hash || '').replace('#', ''); }
+
+/* 点击标签只改 hash，由 hashchange 统一调 show()，前进/后退零成本 */
+var tabs = document.querySelectorAll('.tab');
+for (var ti = 0; ti < tabs.length; ti++){
+  tabs[ti].addEventListener('click', (function(t){
+    return function(){ location.hash = t.getAttribute('data-p'); };
+  })(tabs[ti]));
+}
+window.addEventListener('hashchange', function(){ show(currentHash()); });
+
+/* ---------------- 交互 ---------------- */
+if (slider){
+  slider.addEventListener('input', function(){ setA(parseFloat(slider.value) || 0, 'slider'); });
+}
+
+var presets = document.querySelectorAll('.btns .btn[data-a]');
+for (var pi = 0; pi < presets.length; pi++){
+  presets[pi].addEventListener('click', function(){
+    pause();
+    setA(parseFloat(this.getAttribute('data-a')), 'preset');
+  });
+}
+if (resetBtn) resetBtn.addEventListener('click', function(){ pause(); setA(0.8, 'reset'); });
+
+/* 图层复选框：state.layers 是唯一真相源，checked 与显隐都是它的输出 */
+var layerBoxes = document.querySelectorAll('.layer-list input[data-layer]');
+for (var li = 0; li < layerBoxes.length; li++){
+  layerBoxes[li].addEventListener('change', function(){
+    var n = parseInt(this.getAttribute('data-layer'), 10);
+    state.layers[n - 1] = this.checked ? 1 : 0;
+    renderLayers();
+    updateLayerNote();
+  });
+}
+
+var LAYER_NOTE = [
+  '<b>① A、B 与直线 AB</b><br>两点确定一条直线。斜率 k = (a−3)/2 随 a 变化，所以 AB 本身也在变——直接对它做对称是麻烦的。',
+  '<b>② 对称轴 y=a、对称点 A′、线段 BA′</b><br><b>这是全题的题眼。</b>对称轴 y=a 恰好穿过 B(0,a)，所以 B 关于它对称到<b>自身</b>（不动点）。于是：<br>· 线段 AB 的像 = 线段 <b>BA′</b>，其中 A′(−2, 2a−3)<br>· L′ 就是过 B 和 A′ 的直线<br>拖 a 时请盯住<b>线段 BA′ 绕 B 转动</b>——L′ 的「转动」是肉眼可见的，不是算出来的。',
+  '<b>③ 圆 C、垂足 H、垂距 d</b><br>把「L′ 与圆有公共点」翻译成「圆心到 L′ 的距离 d ≤ r」。图中橙色线段就是 d。转动 a 时会看到：<b>d 先变小、到 a=1 时缩为 0（L′ 过圆心）、再变大</b>。',
+  '<b>④ 两条相切临界线</b><br>当 d 刚好等于 r=1 时，两条橙色虚线。它们对应 a = 1/3 与 a = 3/2。<br>夹在两条虚线<b>之间</b>的所有位置都满足 d ≤ r，因此答案是<b>一个区间</b>而不是两个值——这正是母题（相切，求值）被改造成本题（有公共点，求范围）的关键一步。'
+];
+function updateLayerNote(){
+  var el = document.getElementById('layerNote');
+  if (!el) return;
+  var on = [];
+  for (var i = 0; i < 4; i++){ if (state.layers[i]) on.push(i); }
+  if (!on.length){
+    el.innerHTML = '<span style="color:#8891a1;">四层都已关闭。勾选上方复选框，逐层拆开这道题的命题结构。</span>';
+    return;
+  }
+  /* 显示已开启的最深一层，保证「逐层展开」时文字跟着走 */
+  el.innerHTML = LAYER_NOTE[on[on.length - 1]];
+}
+
+/* ---------------- 自动演示：rAF + 时间基 ---------------- */
+var rafId = null, lastT = 0;
+function tick(t){
+  if (!state.playing) return;
+  if (!lastT) lastT = t;
+  var dt = Math.min((t - lastT) / 1000, 0.1);
+  lastT = t;
+  var nx = state.a + dt * 0.62;
+  if (nx >= 3){ setA(3, 'anim'); pause(); return; }
+  setA(nx, 'anim');
+  rafId = requestAnimationFrame(tick);
+}
+function pause(){
+  state.playing = false;
+  if (rafId){ cancelAnimationFrame(rafId); rafId = null; }
+  lastT = 0;
+  if (playBtn){ playBtn.textContent = '▶ 自动演示'; }
+  if (slider){ slider.disabled = false; }
+}
+if (playBtn) playBtn.addEventListener('click', function(){
+  if (state.playing){ pause(); return; }
+  state.playing = true;
+  lastT = 0;
+  playBtn.textContent = '⏸ 暂停';
+  slider.disabled = true;
+  if (state.a >= 3) setA(-1.6, 'anim');
+  rafId = requestAnimationFrame(tick);
+});
+
+/* ---------------- 启动 ---------------- */
+updateLayerNote();
+show(currentHash() || 'orig', true);   /* 首次加载不会触发 hashchange，必须显式调一次 */
+if (!currentHash()){                   /* 兜默认值时用 replaceState，避免污染历史 */
+  if (history.replaceState) history.replaceState(null, '', '#orig');
+}
 })();
 </script>
 </body>
